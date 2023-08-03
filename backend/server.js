@@ -2,10 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import { chats } from "./data/data.js";
 import cors from "cors";
+import connectDB from "./config/db.js";
 
 //configuring dotenv file
 
 dotenv.config();
+connectDB();
 const app = express();
 
 //setting cors middleware to allow cross-origin resource sharing
