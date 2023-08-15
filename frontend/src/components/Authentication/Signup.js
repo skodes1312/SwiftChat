@@ -55,6 +55,7 @@ const Signup = () => {
       return;
     }
     console.log(img);
+
     if (img.type === "image/jpeg" || img.type === "image/png") {
       const data = new FormData();
       data.append("file", img);
@@ -64,7 +65,20 @@ const Signup = () => {
         method: "post",
         body: data,
       })
-        .then((res) => res.json())
+        .then(async (res) => {
+          const data = await res.json();
+          if (data.error) {
+            toast({
+              title: data.error.message.split(".")[0],
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+              position: "bottom",
+            });
+            return;
+          }
+          return data;
+        })
         .then((data) => {
           setProfile_pic(data.url.toString());
           console.log(data.url.toString());
