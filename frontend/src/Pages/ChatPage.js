@@ -20,7 +20,9 @@ const ChatPage = () => {
         p="10px"
       >
         {user && <MyChats />}
-        {user && <ChatRoom />}
+        {user && (
+          <ChatRoom fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
       </Box>
     </div>
   );
